@@ -8,7 +8,8 @@ let cwd = process.cwd();
 
 let defProjectRe = /(\(defproject \S+ ")([^"]+)(")/;
 
-async function main(version) {
+async function main() {
+  console.log(chalk.green("clj-version"));
   let projectCljPath = path.join(cwd, "project.clj");
   if (!fs.existsSync(projectCljPath)) {
     console.error("No project.clj found");
@@ -49,6 +50,7 @@ async function main(version) {
   spawnSync(`git add project.clj`);
   spawnSync(`git commit -m "v${nextVersion}"`);
   spawnSync(`git tag -a ${nextVersion} -m "${nextVersion}"`);
+  console.log(chalk.green("Done!"));
 }
 
-main();
+exports.main = main;

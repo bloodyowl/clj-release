@@ -1,8 +1,11 @@
 {
-  "name": "clj-release",
+  "name": "clj-version",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "bin": {
+    "clj-version": "./bin/clj-version"
+  },
   "dependencies": {
     "chalk": "^4.1.0",
     "prompt": "^1.0.0",
