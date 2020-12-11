@@ -47,9 +47,11 @@ async function main() {
   }
   let nextProjectClj = projectClj.replace(defProjectRe, `$1${nextVersion}$3`);
   fs.writeFileSync(projectCljPath, nextProjectClj, "utf8");
-  spawnSync(`git add project.clj`);
-  spawnSync(`git commit -m "v${nextVersion}"`);
-  spawnSync(`git tag -a ${nextVersion} -m "${nextVersion}"`);
+  spawnSync(`git`, ["add", "project.clj"], { cwd: cwd });
+  spawnSync(`git`, ["commit", "-m", `v${nextVersion}`], { cwd: cwd });
+  spawnSync(`git`, ["tag", "-a", `${nextVersion}`, "-m", `${nextVersion}`], {
+    cwd: cwd,
+  });
   console.log(chalk.green("Done!"));
 }
 
